@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Method to track Pokemons using the Pokemap</description>
+   <name>Pokemap Tracking</name>
+   <tag>pokemap</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>7f5db95b-bac5-48d9-aba7-c21416fcd326</testCaseGuid>
+</TestCaseEntity>

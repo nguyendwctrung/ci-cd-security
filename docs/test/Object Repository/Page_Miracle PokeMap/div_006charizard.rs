@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>div_006charizard</name>
+   <tag></tag>
+   <elementGuidId>4a169d54-beb4-4828-b843-a1c013bd4857</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='root']/div/main/div/div/div[4]/div/div[5]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorCollection>
+      <entry>
+         <key>SMART_LOCATOR</key>
+         <value>div >> internal:has-text=/^#006charizard$/ >> nth=0</value>
+      </entry>
+   </smartLocatorCollection>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+      <webElementGuid>4c1b5f61-b917-4cd8-9478-d3b11b44db8d</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>
+                      relative group cursor-pointer p-4 rounded-2xl transition-all duration-300
+                      bg-slate-800 hover:bg-slate-700 hover:scale-105
+                   </value>
+      <webElementGuid>6e469496-c389-47af-be04-2489128c291f</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>#006charizard</value>
+      <webElementGuid>133ea91e-dd25-4b54-848f-4ca61bc8e860</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;root&quot;)/div[1]/main[@class=&quot;mt-16&quot;]/div[@class=&quot;min-h-screen text-slate-100 py-8 px-4 font-sans flex justify-center&quot;]/div[@class=&quot;w-full max-w-4xl bg-slate-800 rounded-[2rem] border-2 border-slate-600 shadow-2xl overflow-hidden relative animate___animated animate__fadeIn&quot;]/div[@class=&quot;px-10 pb-12 pt-4&quot;]/div[@class=&quot;flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8&quot;]/div[@class=&quot;relative group cursor-pointer p-4 rounded-2xl transition-all duration-300
+                      bg-slate-800 hover:bg-slate-700 hover:scale-105&quot;]</value>
+      <webElementGuid>ba26995d-cc00-4161-8db1-0f04c405c01a</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='root']/div/main/div/div/div[4]/div/div[5]</value>
+      <webElementGuid>682e778a-5105-46c9-a87b-4120ec3a7e46</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='↓'])[2]/following::div[1]</value>
+      <webElementGuid>d844a1a3-390a-4a30-ab90-b06917a54769</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[4]/div/div[5]</value>
+      <webElementGuid>984c524f-a93a-4436-9f9d-2566b092d17a</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//div[(text() = '#006charizard' or . = '#006charizard')]</value>
+      <webElementGuid>2838507c-742f-438c-b3b5-becc35166c68</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_Pokedex_w-full bg-gray-60050 text-whi_ab9a24_4</name>
+   <tag></tag>
+   <elementGuidId>d32d8acc-4d87-4dd4-9383-9a531ec1091c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//input[@value='char']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <smartLocatorCollection>
+      <entry>
+         <key>SMART_LOCATOR</key>
+         <value>internal:attr=[placeholder=&quot;Enter pokemon name or number&quot;i]</value>
+      </entry>
+   </smartLocatorCollection>
+   <smartLocatorEnabled>false</smartLocatorEnabled>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>input</value>
+      <webElementGuid>393ab021-f136-4d8a-b978-2ff54c348569</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>placeholder</name>
+      <type>Main</type>
+      <value>Enter pokemon name or number</value>
+      <webElementGuid>bffaf71b-3f58-41d9-a2f2-8aaf01ef7361</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>w-full bg-gray-600/50 text-white placeholder-gray-400 px-5 py-3 pl-5 rounded-full outline-none focus:ring-2 focus:ring-purple-500 border border-transparent backdrop-blur-sm</value>
+      <webElementGuid>b6c52d77-53c5-4a1f-85b1-c2150995b235</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>text</value>
+      <webElementGuid>074b6967-c325-43f1-946e-a1cf8e901cce</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>value</name>
+      <type>Main</type>
+      <value>char</value>
+      <webElementGuid>c80355a7-f2ba-4b2c-b56d-51874c02930b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;root&quot;)/div[1]/main[@class=&quot;mt-16&quot;]/div[@class=&quot;min-h-screen bg-slate-900 text-white p-4 md:p-8 font-sans&quot;]/div[@class=&quot;max-w-7xl mx-auto pb-10&quot;]/div[@class=&quot;w-full space-y-4 mb-8&quot;]/div[@class=&quot;flex gap-4&quot;]/div[@class=&quot;flex-1 relative&quot;]/input[@class=&quot;w-full bg-gray-600/50 text-white placeholder-gray-400 px-5 py-3 pl-5 rounded-full outline-none focus:ring-2 focus:ring-purple-500 border border-transparent backdrop-blur-sm&quot;]</value>
+      <webElementGuid>b43c90ca-c4c3-4f08-b444-427cdc1b5c39</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//input[@value='char']</value>
+      <webElementGuid>00959cbd-49d0-4f4c-b8de-28e6666fed24</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='root']/div/main/div/div/div/div/div/input</value>
+      <webElementGuid>a85bacbc-85cb-41c0-8dfa-32bc6d136db9</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//main/div/div/div/div/div/input</value>
+      <webElementGuid>70b1af5b-275c-492e-bd73-ab84893c23be</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//input[@placeholder = 'Enter pokemon name or number' and @type = 'text']</value>
+      <webElementGuid>75e35713-ab06-4f8b-9a0a-830bb6944723</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Use the search bar function in the Pokedex</description>
+   <name>Pokedex Name Search</name>
+   <tag>pokedex</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c40585d1-5a88-456d-b38d-e38e3006bbf7</testCaseGuid>
+</TestCaseEntity>
