@@ -27,6 +27,17 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install Server Dependencies
+        run: |
+          cd server
+          npm ci
+
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm ci
 
       - name: Install & Lint Server
         run: |
