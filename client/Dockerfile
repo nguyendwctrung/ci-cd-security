@@ -1,6 +1,9 @@
 # Stage 1: Build static assets
 FROM node:24-alpine AS builder
 
+# Update and upgrade packages
+RUN apk update && apk upgrade --no-cache
+
 # Set working directory
 WORKDIR /app
 
