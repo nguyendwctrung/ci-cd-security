@@ -96,7 +96,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Server Image
-        run: docker build -t pokemap-server:test ./server
+        run: docker build --no-cache -t pokemap-server:test ./server
 
       - name: Scan Server Image with Trivy
         uses: aquasecurity/trivy-action@master

@@ -12,7 +12,7 @@ COPY package*.json ./
 RUN npm ci --silent
 
 # Stage 2: (optionally test or build)
-FROM node:24-alpine AS build
+FROM node:lts-alpine AS build
 
 WORKDIR /app
 
@@ -23,7 +23,7 @@ COPY . .
 # RUN npm test
 
 # Stage 3: production runtime
-FROM node:24-alpine AS production
+FROM node:lts-alpine AS production
 
 WORKDIR /app
 
