@@ -1,6 +1,9 @@
 # Stage 1: deps
 FROM node:24-alpine AS deps
 
+# Update and upgrade packages
+RUN apk update && apk upgrade --no-cache
+
 # Set working directory
 WORKDIR /app
 
