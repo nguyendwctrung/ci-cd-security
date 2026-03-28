@@ -1,30 +1,35 @@
-# Stage 1: Build dependencies
+# Stage 1: deps
 FROM node:24-alpine AS deps
+
+# Set working directory
 WORKDIR /app
 
-# Install dependencies from package manifests
+# Install dependencies
 COPY package*.json ./
 RUN npm ci --silent
 
-# Stage 2: Optional tests and verification
-FROM node:24-alpine AS test
+# Stage 2: (optionally test or build)
+FROM node:24-alpine AS build
+
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Uncomment if tests exist:
+# if test exists:
 # RUN npm test
 
-# Stage 3: Production runtime image
+# Stage 3: production runtime
 FROM node:24-alpine AS production
+
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV PORT=10000
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY --from=build /app .
 
 EXPOSE 10000
 
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]

@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: production
+    container_name: pokemap-server
+    env_file:
+      - ./server/.env
+    environment:
+      - NODE_ENV=production
+      - PORT=10000
+      - DATABASE=${DATABASE}
+      - JWT_SECRET=${JWT_SECRET}
+    ports:
+      - "10000:10000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:10000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: pokemap-client
+    ports:
+      - "3800:80"
+    environment:
+      - VITE_API_URL=http://localhost:10000
+      - VITE_SOCKET_URL=http://localhost:10000
+    depends_on:
+      - server
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
