@@ -79,7 +79,7 @@ jobs:
             p/javascript
             p/typescript
             p/react
-            p/node
+            p/nodejs
 
       # Scan Dependencies (Trivy FS)
       - name: Trivy Dependency Scan
