@@ -1,0 +1,83 @@
+name: Deploy To AWS EC2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  APP_DIR: ${{ vars.EC2_APP_DIR }}
+  EC2_PORT: ${{ vars.EC2_PORT || '22' }}
+
+jobs:
+  deploy:
+    name: Deploy To EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Server Environment File
+        run: |
+          set -e
+          cat > server/.env <<'EOF'
+          NODE_ENV=production
+          PORT=10000
+          DATABASE=${{ secrets.DATABASE }}
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          EMAIL_USER=${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
+          CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
+          CLIENT_URL=${{ vars.VITE_API_URL }}
+          EOF
+
+      - name: Create Client Environment File
+        run: |
+          set -e
+          cat > client/.env.production <<'EOF'
+          VITE_API_URL=${{ vars.VITE_API_URL }}
+          VITE_TINY_MCE=${{ vars.VITE_TINY_MCE }}
+          EOF
+
+      - name: Copy Application To EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ env.EC2_PORT }}
+          source: client,server,docker-compose.yml
+          target: ${{ env.APP_DIR }}
+          overwrite: true
+          rm: true
+
+      - name: Deploy On EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ env.EC2_PORT }}
+          script_stop: true
+          script: |
+            set -e
+            cd "${{ env.APP_DIR }}"
+            docker compose version
+            docker compose down || true
+            docker compose up --build -d
+            docker image prune -f
+
+      - name: Deployment Summary
+        run: |
+          echo "Deployment completed successfully."
+          echo "Host: ${{ secrets.EC2_HOST }}"

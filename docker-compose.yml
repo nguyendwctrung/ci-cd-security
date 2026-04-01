@@ -12,8 +12,6 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=10000
-      - DATABASE=${DATABASE}
-      - JWT_SECRET=${JWT_SECRET}
     ports:
       - "10000:10000"
     restart: unless-stopped
@@ -28,14 +26,15 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-}
+        - VITE_TINY_MCE=${VITE_TINY_MCE:-}
     container_name: pokemap-client
     ports:
       - "3800:80"
-    environment:
-      - VITE_API_URL=http://localhost:10000
-      - VITE_SOCKET_URL=http://localhost:10000
     depends_on:
-      - server
+      server:
+        condition: service_healthy
     restart: unless-stopped
 
 networks:
