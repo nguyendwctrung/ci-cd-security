@@ -3,6 +3,10 @@ name: CI/CD Security Pipeline
 on:
   push:
     branches: [ main, dev ]
+    paths:
+      - 'server/**'
+      - 'client/**'
+      - 'security-tools/**'
   pull_request:
     branches: [ main ]
 
