@@ -11,6 +11,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --silent
 
+# Build args for Vite (overridden by .env.production if present)
+ARG VITE_API_URL
+ARG VITE_TINY_MCE
+
 # Copy source code and build
 COPY . .
 RUN npm run build

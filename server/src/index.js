@@ -16,9 +16,13 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 const server = http.createServer(app);
+const ALLOWED_ORIGINS = process.env.CLIENT_URL
+    ? process.env.CLIENT_URL.split(',')
+    : ['http://localhost:3800'];
+
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:3800'],
+        origin: ALLOWED_ORIGINS,
         methods: ['GET', 'POST'],
         credentials: true
     }
@@ -29,9 +33,7 @@ connectDatabase();
 
 
 app.use(cors({
-    origin: [
-        'http://localhost:3800'
-    ],
+    origin: ALLOWED_ORIGINS,
     methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
