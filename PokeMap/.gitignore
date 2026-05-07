@@ -1,0 +1,39 @@
+# ────────────────────────────────────────────
+# PokeMap mono-repo root .gitignore
+# ────────────────────────────────────────────
+
+# Dependencies (scoped to sub-projects)
+src/server/node_modules/
+src/client/node_modules/
+
+# Environment variables
+src/server/.env
+src/client/.env
+src/client/.env.local
+src/client/.env.*.local
+
+# Build outputs
+src/client/dist/
+src/client/dist-ssr/
+
+# File upload staging area
+src/server/tempUploads/
+
+# Test reports and coverage
+coverage/
+*.lcov
+test-results/
+playwright-report/
+
+# Docs build artifacts
+docs/**/*.pdf
+docs/**/*.docx
+docs/build/
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

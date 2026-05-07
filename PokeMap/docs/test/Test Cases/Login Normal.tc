@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Normal login using an in-house account</description>
+   <name>Login Normal</name>
+   <tag>user</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>3b771ba8-ace5-4835-8c6a-39da1a881798</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Use the filtering option by type within the Pokedex</description>
+   <name>Pokedex Type Search</name>
+   <tag>pokedex</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>26d55da8-2642-4198-aeee-e2711c024c84</testCaseGuid>
+</TestCaseEntity>

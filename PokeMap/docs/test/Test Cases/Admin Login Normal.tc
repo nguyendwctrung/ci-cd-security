@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Normal Admin login method using an in-house account</description>
+   <name>Admin Login Normal</name>
+   <tag>admin</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>931c671a-25c4-4b82-bc5e-a425ab8c73a0</testCaseGuid>
+</TestCaseEntity>

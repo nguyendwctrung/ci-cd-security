@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Selecting Regions within the Pokemap</description>
+   <name>Pokemap Region Select</name>
+   <tag>pokemap</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>dacc3240-f5a6-4bfd-98bc-ce659431ddb6</testCaseGuid>
+</TestCaseEntity>
