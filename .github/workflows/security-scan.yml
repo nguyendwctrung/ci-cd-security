@@ -109,22 +109,19 @@ jobs:
           echo "=== Security Reports ==="
           if [ -f "${{ env.REPORTS_DIR }}/summary.json" ]; then
             echo ""
-            echo "Summary Report:"
-            echo "----------------------------------------"
+            echo "Summary Report:"            
             cat ${{ env.REPORTS_DIR }}/summary.json
             echo ""
           fi
           if [ -f "${{ env.REPORTS_DIR }}/ai_analysis.json" ]; then
             echo ""
-            echo "AI Analysis Report:"
-            echo "----------------------------------------"
+            echo "AI Analysis Report:"          
             cat ${{ env.REPORTS_DIR }}/ai_analysis.json
             echo ""
           fi
           if [ -f "${{ env.REPORTS_DIR }}/decision_report.json" ]; then
             echo ""
-            echo "Decision Report:"
-            echo "----------------------------------------"
+            echo "Decision Report:"            
             cat ${{ env.REPORTS_DIR }}/decision_report.json
             echo ""
           fi
