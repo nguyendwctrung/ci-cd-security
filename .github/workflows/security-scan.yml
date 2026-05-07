@@ -112,11 +112,11 @@ jobs:
             cat ${{ env.REPORTS_DIR }}/summary.json
           fi
           if [ -f "${{ env.REPORTS_DIR }}/ai_analysis.json" ]; then
-            echo "AI Analysis Report:"
+            echo "\nAI Analysis Report:"
             cat ${{ env.REPORTS_DIR }}/ai_analysis.json
           fi
           if [ -f "${{ env.REPORTS_DIR }}/decision_report.json" ]; then
-            echo "Decision Report:"
+            echo "\nDecision Report:"
             cat ${{ env.REPORTS_DIR }}/decision_report.json
           fi
 
