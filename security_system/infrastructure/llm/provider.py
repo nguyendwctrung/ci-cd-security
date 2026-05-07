@@ -11,12 +11,12 @@ No prompt logic lives here; prompts are owned by the domain layer.
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 from typing import Optional
 
 from dotenv import load_dotenv
+from security_system.domain.analysis.llm_client import parse_llm_json_response
 
 load_dotenv()
 
@@ -95,6 +95,10 @@ class GeminiProvider:
             response = self._client.models.generate_content(
                 model=self._model,
                 contents=full_prompt,
+                config={
+                    "temperature": 0,
+                    "response_mime_type": "application/json",
+                },
             )
 
             if not response.text:
@@ -127,17 +131,10 @@ class GeminiProvider:
         if text is None:
             return None
 
-        json_text = text.strip()
-
-        # Strip markdown code fences if present
-        if json_text.startswith("```"):
-            json_text = json_text.split("\n", 1)[-1]
-            json_text = json_text.rsplit("```", 1)[0].strip()
-
-        try:
-            result = json.loads(json_text)
-            logger.info("Gemini response parsed successfully")
-            return result
-        except json.JSONDecodeError as exc:
-            logger.error("Failed to parse Gemini response as JSON: %s", exc)
+        result = parse_llm_json_response(text)
+        if result is None:
+            logger.error("Failed to parse Gemini response as JSON")
             return None
+
+        logger.info("Gemini response parsed successfully")
+        return result

@@ -10,6 +10,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from security_system.domain.models import GitContext
+from .llm_client import max_scanner_severity
 
 # ---------------------------------------------------------------------------
 # System prompt — defines the model's role and output schema
@@ -34,6 +35,15 @@ Malicious indicators to look for:
 - Suspicious dependency additions
 - Certificate or key generation for unauthorized access
 
+Mandatory output rules:
+1) Language: English only. Do not use Indonesian, Vietnamese, or mixed-language text.
+2) Format: Return one valid JSON object only. No markdown, no code fences, no extra text.
+3) Severity fidelity: Use exact scanner severities and never exaggerate.
+   - Never label HIGH findings as CRITICAL unless scanner data includes CRITICAL.
+   - If evidence is uncertain, choose the lower severity.
+4) Reasoning quality: concise, technical, evidence-based, professional.
+5) Recommendations: concise, actionable, production-ready remediation steps.
+
 You MUST respond with valid JSON only — no markdown, no explanation outside the JSON.
 Use this exact structure:
 {
@@ -42,7 +52,7 @@ Use this exact structure:
 	"is_malicious": <true|false>,
 	"detected_patterns": ["<pattern>", ...],
 	"recommendations": ["<action>", ...],
-	"reasoning": "<concise explanation>"
+	"reasoning": "<concise technical explanation>"
 }"""
 
 # ---------------------------------------------------------------------------
@@ -51,6 +61,12 @@ Use this exact structure:
 
 _USER_PROMPT_TEMPLATE = """\
 Analyze this code change for security threats.
+
+NON-NEGOTIABLE CONSTRAINTS:
+- Respond in English only.
+- Output valid JSON only.
+- Use scanner severities exactly; do not inflate severity wording.
+- Maximum allowed severity from scanners: {max_scan_severity}
 
 COMMIT INFORMATION:
 - Hash: {commit_hash}
@@ -73,7 +89,7 @@ ISSUE COUNTS:
 - Semgrep: {semgrep_count}
 - Trivy: {trivy_count}
 
-Respond in JSON only."""
+Respond with JSON only."""
 
 
 # ---------------------------------------------------------------------------
@@ -97,8 +113,10 @@ def build_analysis_prompt(git_ctx: GitContext, scan_data: Dict[str, Any]) -> str
 	gitleaks: List = scan_data.get("gitleaks", [])
 	semgrep: List = scan_data.get("semgrep", [])
 	trivy: List = scan_data.get("trivy", [])
+	max_scan_severity = max_scanner_severity(scan_data)
 
 	return _USER_PROMPT_TEMPLATE.format(
+		max_scan_severity=max_scan_severity,
 		commit_hash=git_ctx.commit_hash,
 		author=git_ctx.author,
 		commit_message=git_ctx.commit_message,
