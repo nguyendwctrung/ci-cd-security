@@ -108,16 +108,25 @@ jobs:
         run: |
           echo "=== Security Reports ==="
           if [ -f "${{ env.REPORTS_DIR }}/summary.json" ]; then
+            echo ""
             echo "Summary Report:"
+            echo "----------------------------------------"
             cat ${{ env.REPORTS_DIR }}/summary.json
+            echo ""
           fi
           if [ -f "${{ env.REPORTS_DIR }}/ai_analysis.json" ]; then
-            echo "\nAI Analysis Report:"
+            echo ""
+            echo "AI Analysis Report:"
+            echo "----------------------------------------"
             cat ${{ env.REPORTS_DIR }}/ai_analysis.json
+            echo ""
           fi
           if [ -f "${{ env.REPORTS_DIR }}/decision_report.json" ]; then
-            echo "\nDecision Report:"
+            echo ""
+            echo "Decision Report:"
+            echo "----------------------------------------"
             cat ${{ env.REPORTS_DIR }}/decision_report.json
+            echo ""
           fi
 
       - name: Upload security reports
