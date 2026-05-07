@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from security_system_v1.domain.models import GitContext
+from security_system.domain.models import GitContext
 
 # ---------------------------------------------------------------------------
 # System prompt — defines the model's role and output schema

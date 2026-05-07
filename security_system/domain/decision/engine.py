@@ -16,8 +16,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from security_system_v1.domain.models import AnalysisResult, DecisionReport
-from security_system_v1.utils.file_utils import write_json
+from security_system.domain.models import AnalysisResult, DecisionReport
+from security_system.utils.file_utils import write_json
 from .evaluator import RiskEvaluator
 
 logger = logging.getLogger(__name__)

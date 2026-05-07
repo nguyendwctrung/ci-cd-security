@@ -13,8 +13,8 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, Optional
 
-from security_system_v1.domain.analysis import LLMAnalyzer
-from security_system_v1.domain.models import AnalysisResult, GitContext
+from security_system.domain.analysis import LLMAnalyzer
+from security_system.domain.models import AnalysisResult, GitContext
 from .run_scan import ScanOutput
 
 logger = logging.getLogger(__name__)
@@ -46,7 +46,7 @@ def analyze(
 	# Import provider here to keep infrastructure out of module-level scope
 	# and to enable easy mocking in tests.
 	try:
-		from security_system_v1.infrastructure.llm import GeminiProvider
+		from security_system.infrastructure.llm import GeminiProvider
 		provider = GeminiProvider(api_key=api_key)
 	except EnvironmentError as exc:
 		logger.warning("LLM provider unavailable — using fallback: %s", exc)

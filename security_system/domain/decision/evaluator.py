@@ -10,7 +10,7 @@ Contains no I/O, no side effects — pure evaluation logic.
 
 from __future__ import annotations
 
-from security_system_v1.domain.models import AnalysisResult, DecisionType
+from security_system.domain.models import AnalysisResult, DecisionType
 
 # Thresholds inlined from security_system.config.constants
 RISK_THRESHOLD_FAIL: float = 7.0  # Decision: FAIL (block commit)

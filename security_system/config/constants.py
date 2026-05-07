@@ -1,5 +1,5 @@
 """
-Central constants for security_system_v1.
+Central constants for security_system.
 
 Defines paths, file names, and configuration values used across the system.
 """
@@ -10,10 +10,10 @@ from pathlib import Path
 # Directory Paths (package-relative)
 # ============================================================================
 
-# Base directory: /path/to/security_system_v1/
+# Base directory: /path/to/security_system/
 BASE_DIR = Path(__file__).resolve().parents[1]
 
-# Reports directory: /path/to/security_system_v1/reports/artifacts/
+# Reports directory: /path/to/security_system/reports/artifacts/
 REPORTS_DIR = BASE_DIR / "reports" / "artifacts"
 
 # ============================================================================

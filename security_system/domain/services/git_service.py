@@ -12,7 +12,7 @@ import subprocess
 from datetime import datetime
 from typing import Dict, List, Optional
 
-from security_system_v1.domain.models import GitContext
+from security_system.domain.models import GitContext
 
 logger = logging.getLogger(__name__)
 

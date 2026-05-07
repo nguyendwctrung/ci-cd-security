@@ -5,7 +5,7 @@ Wraps the Google Gemini API (google-genai SDK).
 All API key and model configuration comes from the environment — no hardcoded values.
 
 This class satisfies the ``LLMClientProtocol`` defined in
-``security_system_v1.domain.analysis.analyzer`` and is injected there.
+``security_system.domain.analysis.analyzer`` and is injected there.
 No prompt logic lives here; prompts are owned by the domain layer.
 """
 

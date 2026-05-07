@@ -14,15 +14,15 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List
 
-from security_system_v1.domain.models import SecurityIssue
-from security_system_v1.domain.parsers import (
+from security_system.domain.models import SecurityIssue
+from security_system.domain.parsers import (
 	GitleaksParser,
 	SemgrepParser,
 	TrivyParser,
 	ToolSummary,
 )
-from security_system_v1.infrastructure.scanners import run_gitleaks, run_semgrep, run_trivy
-from security_system_v1.infrastructure.storage.artifact_store import (
+from security_system.infrastructure.scanners import run_gitleaks, run_semgrep, run_trivy
+from security_system.infrastructure.storage.artifact_store import (
 	GITLEAKS_REPORT,
 	SEMGREP_REPORT,
 	TRIVY_REPORT,

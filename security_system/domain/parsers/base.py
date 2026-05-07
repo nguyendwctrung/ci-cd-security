@@ -12,7 +12,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 
-from security_system_v1.domain.models import SecurityIssue, Severity
+from security_system.domain.models import SecurityIssue, Severity
 
 logger = logging.getLogger(__name__)
 

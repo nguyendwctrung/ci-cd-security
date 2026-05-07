@@ -10,7 +10,7 @@ Wires together all layers in sequence:
 Contains NO business logic — only calls use cases and saves results.
 
 Entry point:
-	python -m security_system_v1.application.pipeline
+	python -m security_system.application.pipeline
 """
 
 from __future__ import annotations
@@ -20,13 +20,13 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from security_system_v1.application.use_cases.run_scan import run_scan
-from security_system_v1.application.use_cases.analyze import analyze
-from security_system_v1.application.use_cases.make_decision import make_decision, _build_summary_dict
-from security_system_v1.config.constants import REPORTS_DIR as DEFAULT_REPORTS_DIR
-from security_system_v1.domain.models import DecisionReport
-from security_system_v1.domain.services import GitService
-from security_system_v1.infrastructure.storage import ArtifactStore, ensure_dir
+from security_system.application.use_cases.run_scan import run_scan
+from security_system.application.use_cases.analyze import analyze
+from security_system.application.use_cases.make_decision import make_decision, _build_summary_dict
+from security_system.config.constants import REPORTS_DIR as DEFAULT_REPORTS_DIR
+from security_system.domain.models import DecisionReport
+from security_system.domain.services import GitService
+from security_system.infrastructure.storage import ArtifactStore, ensure_dir
 
 logger = logging.getLogger(__name__)
 

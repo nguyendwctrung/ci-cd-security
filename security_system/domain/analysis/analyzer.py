@@ -14,7 +14,7 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, Optional, Protocol
 
-from security_system_v1.domain.models import AnalysisResult, GitContext
+from security_system.domain.models import AnalysisResult, GitContext
 from .prompts import SYSTEM_PROMPT, build_analysis_prompt
 
 logger = logging.getLogger(__name__)

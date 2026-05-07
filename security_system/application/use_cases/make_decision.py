@@ -14,9 +14,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict
 
-from security_system_v1.domain.decision import DecisionEngine
-from security_system_v1.domain.models import AnalysisResult, DecisionReport
-from security_system_v1.domain.parsers import ToolSummary
+from security_system.domain.decision import DecisionEngine
+from security_system.domain.models import AnalysisResult, DecisionReport
+from security_system.domain.parsers import ToolSummary
 
 logger = logging.getLogger(__name__)
 

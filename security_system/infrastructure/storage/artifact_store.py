@@ -15,7 +15,7 @@ import logging
 from pathlib import Path
 from typing import Any, Dict
 
-from security_system_v1.config.constants import (
+from security_system.config.constants import (
     REPORTS_DIR as DEFAULT_REPORTS_DIR,
     GITLEAKS_REPORT,
     SEMGREP_REPORT,
