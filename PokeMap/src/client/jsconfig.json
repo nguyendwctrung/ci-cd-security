@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "checkJs": false,
+    "exactOptionalPropertyTypes": false,
+    "resolveJsonModule": true,
+    "module": "esnext",   
+    "moduleResolution": "bundler",
+    
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

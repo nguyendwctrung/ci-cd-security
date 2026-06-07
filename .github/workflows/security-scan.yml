@@ -1,0 +1,185 @@
+name: CI/CD Security Scan
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+env:
+  REPORTS_DIR: security_system/reports/artifacts
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      security-events: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Create reports directory
+        run: mkdir -p ${{ env.REPORTS_DIR }}
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip              
+          pip install -q -r security_system/requirements.txt
+        env:
+          # Ensure pip uses latest package index
+          PIP_INDEX_URL: https://pypi.org/simple/
+
+      - name: Install security scanning tools
+        run: |
+          echo "Installing Gitleaks..."
+          GITLEAKS_VERSION="8.24.2"
+          curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" -o /tmp/gitleaks.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp
+          chmod +x /tmp/gitleaks
+          sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+          
+          echo "Installing Semgrep..."
+          pip install -q semgrep
+          
+          echo "Installing Trivy..."
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y trivy
+
+      - name: Run Gitleaks (Secret Detection)
+        id: gitleaks
+        run: |
+          echo "Running Gitleaks..."
+          echo '{"Leaks":[]}' > ${{ env.REPORTS_DIR }}/gitleaks-report.json
+          gitleaks detect --source . --report-format json --report-path "${{ env.REPORTS_DIR }}/gitleaks-report.json" --no-banner --exit-code 0
+          echo "Gitleaks completed"
+        continue-on-error: true
+
+      - name: Run Semgrep (Code Analysis)
+        id: semgrep
+        run: |
+          echo "Running Semgrep..."
+          semgrep --config=p/security-audit --json \
+            --output=${{ env.REPORTS_DIR }}/semgrep-report.json \
+            . || true
+          echo "Semgrep completed"
+        continue-on-error: true
+
+      - name: Run Trivy (Dependency Scanning)
+        id: trivy
+        run: |
+          echo "Running Trivy..."
+          trivy fs --severity HIGH,CRITICAL --format json \
+            --output ${{ env.REPORTS_DIR }}/trivy-report.json \
+            . || true
+          echo "Trivy completed"
+        continue-on-error: true
+
+      # Legacy execution path (deprecated):
+      # - Parse scan results via parse_results.py
+      # - Run LLM analysis via llm_analyzer.py
+      # - Make security decision via decision_engine.py
+      # These have been consolidated into a single unified pipeline step below.
+      # Kept as comments for migration traceability.
+
+      - name: Run unified security pipeline
+        id: decision
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          echo "Running unified security pipeline..."
+          python -m security_system.application.pipeline
+
+      - name: Display reports
+        if: always()
+        run: |
+          echo "=== Security Reports ==="
+          if [ -f "${{ env.REPORTS_DIR }}/summary.json" ]; then
+            echo ""
+            echo "Summary Report:"            
+            cat ${{ env.REPORTS_DIR }}/summary.json
+            echo ""
+          fi
+          if [ -f "${{ env.REPORTS_DIR }}/ai_analysis.json" ]; then
+            echo ""
+            echo "AI Analysis Report:"          
+            cat ${{ env.REPORTS_DIR }}/ai_analysis.json
+            echo ""
+          fi
+          if [ -f "${{ env.REPORTS_DIR }}/decision_report.json" ]; then
+            echo ""
+            echo "Decision Report:"            
+            cat ${{ env.REPORTS_DIR }}/decision_report.json
+            echo ""
+          fi
+
+      - name: Upload security reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: ${{ env.REPORTS_DIR }}/
+          retention-days: 30
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-logs
+          path: ${{ env.REPORTS_DIR }}/*.log
+          retention-days: 7
+
+      - name: Comment PR with security findings
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportsDir = '${{ env.REPORTS_DIR }}';
+            
+            let comment = '## Security Scan Results\n\n';
+            
+            try {
+              if (fs.existsSync(`${reportsDir}/ai_analysis.json`)) {
+                const analysis = JSON.parse(fs.readFileSync(`${reportsDir}/ai_analysis.json`, 'utf8'));
+                comment += `### LLM Analysis\n`;
+                comment += `- **Risk Score**: ${analysis.risk_score.toFixed(1)}/10\n`;
+                comment += `- **Risk Level**: ${analysis.risk_level}\n`;
+                comment += `- **Malicious**: ${analysis.is_malicious ? 'YES' : 'NO'}\n\n`;
+              }
+              
+              if (fs.existsSync(`${reportsDir}/decision_report.json`)) {
+                const decision = JSON.parse(fs.readFileSync(`${reportsDir}/decision_report.json`, 'utf8'));
+                const icon = decision.decision === 'FAIL' ? '[FAIL]' : decision.decision === 'WARN' ? '[WARN]' : '[PASS]';
+                comment += `### Decision\n`;
+                comment += `${icon} **${decision.decision}**: ${decision.reason}\n`;
+              }
+            } catch (e) {
+              comment += `Failed to parse reports: ${e.message}\n`;
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if security decision is FAIL
+        if: failure() || steps.decision.outcome == 'failure'
+        run: |
+          echo "[FAIL] Security check FAILED - blocking merge"
+          exit 1

@@ -1,0 +1,44 @@
+# ────────────────────────────────────────────
+# PokeMap server — Express 5 + MongoDB/Mongoose
+# ────────────────────────────────────────────
+
+# Dependencies
+node_modules/
+
+# Environment variables (secrets, DB URIs, JWT keys)
+.env
+.env.local
+.env.*.local
+
+# File upload staging (Multer temp directory)
+tempUploads/
+uploads/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Runtime and process
+pids/
+*.pid
+*.seed
+
+# MongoDB local dump
+dump/
+*.bson
+
+# SSL certificates and private keys
+*.pem
+*.key
+*.crt
+*.p12
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

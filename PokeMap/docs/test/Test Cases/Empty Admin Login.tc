@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Admin Login method with empty input values</description>
+   <name>Empty Admin Login</name>
+   <tag>admin</tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>931b084e-c805-4998-99a2-e0fe00409fee</testCaseGuid>
+</TestCaseEntity>
